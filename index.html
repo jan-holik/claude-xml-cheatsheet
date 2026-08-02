@@ -24,7 +24,7 @@
   <div class="page__container">
     <!-- HERO HEADER -->
     <div class="hero__eyebrow">prompt engineering</div>
-    <h1 class="hero__title">XML tagy pro <span class="hero__title-accent">Claude</span></h1>
+    <h1 class="hero__title">XML tagy pro <span class="hero__title--highlight">Claude</span></h1>
     <p class="hero__subtitle">Claude je natrénovaný na XML strukturu — tagy mu pomůžou přesně rozlišit, co je instrukce, co kontext a co příklad. Tady je kompletní věcný přehled nejužitečnějších vzorů a postupů.</p>
 
     <!-- CALLOUT -->
@@ -77,8 +77,7 @@
     <!-- ARCHITEKTURA A SEPARACE VRSTEV -->
     <div class="section-title">Architektura &amp; Rozdělení kontextu</div>
     <p class="section-description">Tři vrstvy, tři různé účely — neměly by se míchat:</p>
-    
-    <div class="grid--three-cols grid--mb-16">
+    <div class="grid--layers grid--primary">
       <div class="card">
         <span class="card__tag">System Prompt</span>
         <p class="card__description">Kdo Claude je, pravidla konverzace, instrukce k interpretaci tagů, persona, hranice odpovědnosti.</p>
@@ -134,8 +133,8 @@
       </div>
       <div class="panel__footer"><b class="panel__footer-highlight">Poznámka k atributům:</b> Dokumentace používá <code class="callout__code">index="1"</code> v příkladech pro Citations, <code class="callout__code">id="1"</code> uvidíš v komunitních vzorech. Funkčně jde o totéž — zvol si jeden štítek a drž se ho v celém promptu.</div>
     </div>
-
-    <div class="grid grid--mt-12">
+    
+    <div class="grid grid--supplementary">
       <div class="card"><span class="card__tag">index="n" / id="n"</span><p class="card__description">Pořadí či identifikátor prvku v kolekci — u &lt;document&gt; i obecně všude pro citace.</p></div>
       <div class="card"><span class="card__tag">role="..."</span><p class="card__description">U zanořených &lt;turn&gt; nebo &lt;message&gt; tagů označuje autora zprávy (user/assistant).</p></div>
       <div class="card"><span class="card__tag">weight="high"</span><p class="card__description">Volná metadata pro označení priority — Claude si sémantiku odvodí z kontextu.</p></div>
@@ -168,8 +167,8 @@
         </p>
       </div>
     </div>
-
-    <div class="panel panel--mt-12">
+    
+    <div class="panel panel--example">
       <div class="panel__header"><span class="panel__dot"></span> větvení úvah a kontrola kvality (&lt;self_correction&gt;, &lt;verification&gt;)</div>
       <div class="panel__code">
         <div class="panel__line-number">1</div><div class="panel__line"><span class="panel__xml-tag">&lt;instructions&gt;</span></div>
@@ -188,7 +187,7 @@
       <div class="card">
         <span class="card__tag">Vynucení přesného formátu</span>
         <p class="card__description">Řekni Claude explicitně, do jakého tagu má sázet a zakaž text okolo.</p>
-        <p class="card__code--alt">
+        <p class="card__code--strict">
           &lt;instructions&gt;<br>
           Odpověz VÝHRADNĚ uvnitř tagu &lt;json&gt;. Žádný text před ani po tagu, žádný markdown fence.<br>
           &lt;/instructions&gt;
@@ -197,8 +196,8 @@
       <div class="card">
         <span class="card__tag">⚠️ Partial outputs / Prefill (Limity)</span>
         <p class="card__description">Přednastavení zprávy (Assistant: <code class="card__description-bold">&lt;response&gt;</code>) <b class="card__description-bold">není podporováno u nových modelů (Claude 4.6+)</b> — request musí končit user zprávou, jinak API vrátí chybu.</p>
-
-        <p class="card__note--mt-8">Náhrada: Použij <b class="card__description-bold">Structured Outputs API</b> (vynucené JSON schématem) nebo instrukci v promptu: <i class="card__description-bold">"odpověz výhradně obsahem tagu &lt;response&gt;"</i>.</p>
+        
+        <p class="card__note--warning">Náhrada: Použij <b class="card__description-bold">Structured Outputs API</b> (vynucené JSON schématem) nebo instrukci v promptu: <i class="card__description-bold">"odpověz výhradně obsahem tagu &lt;response&gt;"</i>.</p>
       </div>
     </div>
 
@@ -240,10 +239,10 @@
             <td class="table__data"><b class="card__description-bold">Vysoká</b> — vnořený JSON/kód komplikuje strukturu</td>
           </tr>
           <tr>
-            <td class="table__data table__data--feature table__data--last-row">Co Claude vidí jako sémantický blok</td>
-            <td class="table__data table__data--last-row"><b class="card__description-bold">Silný signál</b></td>
-            <td class="table__data table__data--last-row">Slabší, model musí odhadnout rozsah sekce</td>
-            <td class="table__data table__data--last-row">Silný, ale na úkor čitelnosti promptu</td>
+            <td class="table__data table__data--feature table__data--final">Co Claude vidí jako sémantický blok</td>
+            <td class="table__data table__data--final"><b class="card__description-bold">Silný signál</b></td>
+            <td class="table__data table__data--final">Slabší, model musí odhadnout rozsah sekce</td>
+            <td class="table__data table__data--final">Silný, ale na úkor čitelnosti promptu</td>
           </tr>
         </tbody>
       </table>
@@ -272,15 +271,15 @@
     <div class="section-title">Best Practices &amp; Anti-Patterns</div>
     <div class="tips">
       <div class="tip"><span class="tip__mark">＋</span><p class="tip__content">Pojmenovávej tagy <b class="tip__content-highlight">popisně</b> — <code class="callout__code">&lt;constraints&gt;</code> řekne Claude víc než <code class="callout__code">&lt;c1&gt;</code>.</p></div>
-      <div class="tip"><span class="tip__mark tip__mark--bad">✕</span><p class="tip__content"><b class="tip__content-highlight">Překrývání tagů:</b> <code class="callout__code">&lt;a&gt;&lt;b&gt;&lt;/a&gt;&lt;/b&gt;</code> je neplatné XML. Struktura musí být striktně zanořená.</p></div>
+      <div class="tip"><span class="tip__mark tip__mark--invalid">✕</span><p class="tip__content"><b class="tip__content-highlight">Překrývání tagů:</b> <code class="callout__code">&lt;a&gt;&lt;b&gt;&lt;/a&gt;&lt;/b&gt;</code> je neplatné XML. Struktura musí být striktně zanořená.</p></div>
       <div class="tip"><span class="tip__mark">＋</span><p class="tip__content">Používej <b class="tip__content-highlight">stejné názvy</b> tagů konzistentně v celém promptu (system, user i few-shot příklady).</p></div>
-      <div class="tip"><span class="tip__mark tip__mark--bad">✕</span><p class="tip__content"><b class="tip__content-highlight">Nekonzistentní názvy:</b> <code class="callout__code">&lt;instructions&gt;</code> v system promptu, <code class="callout__code">&lt;instruction&gt;</code> v user zprávě — pro Claude to jsou různé věci.</p></div>
+      <div class="tip"><span class="tip__mark tip__mark--invalid">✕</span><p class="tip__content"><b class="tip__content-highlight">Nekonzistentní názvy:</b> <code class="callout__code">&lt;instructions&gt;</code> v system promptu, <code class="callout__code">&lt;instruction&gt;</code> v user zprávě — pro Claude to jsou různé věci.</p></div>
       <div class="tip"><span class="tip__mark">＋</span><p class="tip__content"><b class="tip__content-highlight">Nesting = hierarchie:</b> Zanořuj jen tam, kde je reálný vztah rodič–dítě (dokument obsahuje odstavce).</p></div>
-      <div class="tip"><span class="tip__mark tip__mark--bad">✕</span><p class="tip__content"><b class="tip__content-highlight">Over-tagging:</b> Tag na každou větu ("burger" pattern) strukturu rozmělní. Taguj sémantické bloky.</p></div>
+      <div class="tip"><span class="tip__mark tip__mark--invalid">✕</span><p class="tip__content"><b class="tip__content-highlight">Over-tagging:</b> Tag na každou větu ("burger" pattern) strukturu rozmělní. Taguj sémantické bloky.</p></div>
       <div class="tip"><span class="tip__mark">＋</span><p class="tip__content">Atributy pro <b class="tip__content-highlight">identifikaci</b>: <code class="callout__code">id="2"</code>, <code class="callout__code">role="user"</code>. Cokoliv delšího patří do obsahu tagu.</p></div>
-      <div class="tip"><span class="tip__mark tip__mark--bad">✕</span><p class="tip__content"><b class="tip__content-highlight">Chybějící meta-instrukce:</b> Pokud používáš custom tagy jako <code class="callout__code">&lt;verification&gt;</code>, vysvětli jejich účel v system promptu.</p></div>
+      <div class="tip"><span class="tip__mark tip__mark--invalid">✕</span><p class="tip__content"><b class="tip__content-highlight">Chybějící meta-instrukce:</b> Pokud používáš custom tagy jako <code class="callout__code">&lt;verification&gt;</code>, vysvětli jejich účel v system promptu.</p></div>
       <div class="tip"><span class="tip__mark">＋</span><p class="tip__content">Při odkazování v instrukcích <b class="tip__content-highlight">zmiň název tagu</b> — „v &lt;contract&gt; uvedená..." funguje nejlépe.</p></div>
-      <div class="tip"><span class="tip__mark tip__mark--bad">✕</span><p class="tip__content"><b class="tip__content-highlight">Duplicitní tag names:</b> Nepoužívej <code class="callout__code">&lt;data&gt;</code> pro vstupní CSV i výstupní schéma zároveň.</p></div>
+      <div class="tip"><span class="tip__mark tip__mark--invalid">✕</span><p class="tip__content"><b class="tip__content-highlight">Duplicitní tag names:</b> Nepoužívej <code class="callout__code">&lt;data&gt;</code> pro vstupní CSV i výstupní schéma zároveň.</p></div>
     </div>
 
     <!-- FOOTER -->

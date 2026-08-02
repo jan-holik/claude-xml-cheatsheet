@@ -57,7 +57,7 @@
   margin-bottom: 14px;
 }
 
-.hero__title-accent {
+.hero__title--highlight {
   color: var(--amber);
 }
 
@@ -102,7 +102,7 @@
   margin-bottom: 20px;
 }
 
-.panel--mt-12 {
+.panel--example {
   margin-top: 12px;
 }
 
@@ -195,17 +195,17 @@
   gap: 12px;
 }
 
-.grid--three-cols {
+.grid--layers {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
 }
 
-.grid--mb-16 {
+.grid--primary {
   margin-bottom: 16px;
 }
 
-.grid--mt-12 {
+.grid--supplementary {
   margin-top: 12px;
 }
 
@@ -241,7 +241,7 @@
   font-size: 13px;
 }
 
-.card__note--mt-8 {
+.card__note--warning {
   margin-top: 8px;
   font-size: 13px;
 }
@@ -254,7 +254,7 @@
   line-height: 1.6;
 }
 
-.card__code--alt {
+.card__code--strict {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
   color: var(--paper);
@@ -293,7 +293,7 @@
   line-height: 1.5;
 }
 
-.table__data--last-row {
+.table__data--final {
   border-bottom: none;
 }
 
@@ -326,7 +326,7 @@
   flex-shrink: 0;
 }
 
-.tip__mark--bad {
+.tip__mark--invalid {
   color: var(--red);
 }
 
@@ -382,7 +382,7 @@
   .grid {
     grid-template-columns: 1fr;
   }
-  .grid--three-cols {
+  .grid--layers {
     grid-template-columns: 1fr;
   }
   .tips {
